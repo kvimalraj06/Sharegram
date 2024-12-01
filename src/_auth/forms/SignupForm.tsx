@@ -7,7 +7,6 @@ import {
   Button,
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,6 +16,7 @@ import {
 import { signUpValidations } from "@/lib/Validations";
 import { signUpFormField } from "@/lib/Constants";
 import { Link } from "react-router-dom";
+import { createAccount } from "@/lib/Api/api";
 
 const SignupForm = () => {
   const form = useForm<z.infer<typeof signUpValidations>>({
@@ -29,7 +29,9 @@ const SignupForm = () => {
     },
   });
 
-  const onSubmit = () => {};
+  const onSubmit = async (values: z.infer<typeof signUpValidations>) => {
+    const newUser = await createAccount(values);
+  };
 
   const renderSignUpFormFields = () => {
     return signUpFormField.map((fieldData: any) => {
@@ -73,7 +75,7 @@ const SignupForm = () => {
         >
           {renderSignUpFormFields()}
           <Button className="shad-button_primary w-full" type="submit">
-            Submit
+            Sign up
           </Button>
           <p className="text-small-regular text-light-2 text-center mt-2">
             Already have an account?
