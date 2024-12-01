@@ -20,7 +20,7 @@ const App = () => {
 
         {/* private routes */}
         <Route element={<RootLayout />}>
-          <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
         </Route>
       </Routes>
     </main>
